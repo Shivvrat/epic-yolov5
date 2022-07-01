@@ -254,3 +254,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+/Users/shivvarya/Desktop/Study/Research_PTG/Code/epic_kitchen/epic_kitchens_55_object_detection/yolov5/get_data/processed-labels/train_full.txt
+/Users/shivvarya/Desktop/Study/Research_PTG/Code/epic_kitchen/epic_kitchens_55_object_detection/yolov5/get_data/downloaded-labels/EPIC_train_object_labels.csv
+/Users/shivvarya/Desktop/Study/Research_PTG/Code/epic_kitchen/epic_kitchens_55_object_detection/yolov5/get_data/annotations/EPIC_train_object_labels.csv

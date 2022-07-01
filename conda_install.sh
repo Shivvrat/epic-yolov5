@@ -14,7 +14,8 @@ conda activate epic_yolo
 conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
 conda install 'matplotlib>=3.2.2'
 conda install 'numpy>=1.18.5'
-conda install 'opencv-python>=4.1.1'
+conda install -c conda-forge opencv
+#conda install 'opencv-python>=4.1.1'
 conda install 'Pillow>=7.1.2'
 conda install 'PyYAML>=5.3.1'
 conda install 'requests>=2.23.0'
@@ -30,4 +31,6 @@ conda install 'pandas>=1.1.4'
 conda install 'seaborn>=0.11.0'
 conda install ipython
 conda install psutil  # system utilization'
-conda install thop  # FLOPs computation'
+
+pip install thop # FLOPs computation'
+pip install opencv-python>=4.1.1

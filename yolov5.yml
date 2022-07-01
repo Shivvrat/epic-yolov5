@@ -1,0 +1,23 @@
+name: epic_yolo
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6
+  - cudatoolkit=11.3
+  - torchaudio
+  - pytorch
+  - torchvision
+  - matplotlib[version='>=3.2.2']
+  - pyyaml[version='>=5.3.1']
+  - requests[version='>=2.23.0']
+  - scipy[version='>=1.4.1']
+  - tqdm[version='>=4.41.0']
+  - protobuf[version='<4.21.3']
+  - tensorboard[version='>=2.4.1']
+  - wandb
+  - pandas[version='>=1.1.4']
+  - seaborn[version='>=0.11.0']
+  - ipython
+  - opencv
+prefix: /home/sxa180157/anaconda3/envs/epic_yolo
