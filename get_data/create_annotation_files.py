@@ -14,7 +14,7 @@ def process_dataset(labels):
     nouns_list = [row['class_key'] for index, row in all_nouns.iterrows()]
     ClassData = namedtuple('ClassData', 'new_id name')
     class_dict = {}
-
+    # Label dict - key - location, value - bounding boxes and class value
     labels_dict = {}
     LabelData = namedtuple('LabelData', 'object_class bounding_box')
     for index, label in labels.iterrows():
@@ -50,12 +50,14 @@ def process_dataset(labels):
             labels_dict[location] = new_boundingboxes
     return labels_dict
 
-
+import pathlib
+labels = pd.read_csv('annotations/EPIC_train_object_labels.csv')
 print('-------- SAVING LABELS IN YOLO FORMAT --------')
-with open('processed-labels/train.txt', 'w') as train_file:
-    labels_dict = process_dataset(labels)
-    for key in labels_dict:
-        train_file.write(key + ' ')
+labels_dict = process_dataset(labels)
+for key in labels_dict:
+    with open(key, 'w') as train_file:
+        directory = key.rpartition('/')[0]
+        pathlib.Path(directory).mkdir(parents=True, exist_ok=True)
         for label in labels_dict[key]:
             train_file.write(str(label.bounding_box[1]) + ',' + str(label.bounding_box[0]) + ',' + str(
                 label.bounding_box[1] + label.bounding_box[3]) + ',' + str(
