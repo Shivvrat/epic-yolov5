@@ -12,7 +12,9 @@ def get_frame_path(participant_id, video_id, frame_num):
 def get_frame_size(video_info_file):
     video_info = pd.read_csv(video_info_file)
     ResolutionData = namedtuple('ResolutionData', 'width height')
-    resolution_dict = {row["video"]: row['resolution'].split("x") for index, row in video_info.iterrows()}
+    # label = LabelData(object_class=object_class, bounding_box=bb)
+
+    resolution_dict = {row["video"]: ResolutionData(int(row['resolution'].split("x")[0]), int(row['resolution'].split("x")[1])) for index, row in video_info.iterrows()}
     return resolution_dict
 
 
@@ -23,14 +25,14 @@ def process_dataset(labels):
     class_dict = {}
     # Label dict - key - location, value - bounding boxes and class value
     labels_dict = {}
-    LabelData = namedtuple('LabelData', 'object_class bounding_box')
+    LabelData = namedtuple('LabelData', 'video_id object_class bounding_box')
     for index, label in labels.iterrows():
         # location = '/datasets/EPIC-KITCHENS/' + label['participant_id'] + '/object_detection_images/' + label[
         #     'video_id'] + '/' + str(label['frame']).rjust(10, '0') + '.jpg'
         location = get_frame_path(label['participant_id'], label['video_id'], str(label['frame']).rjust(10, '0'))
         bounding_boxes = ast.literal_eval(label['bounding_boxes'])
         object_class = label['noun_class']  # Use id, a same class may have different names
-
+        video_id = label['video_id']
         # Save classes in dictionary
         if object_class not in class_dict:
             class_data = ClassData(new_id=len(class_dict), name=nouns_list[object_class])  # Save the first noun name
@@ -43,7 +45,7 @@ def process_dataset(labels):
 
         partial_labels = []
         for bb in bounding_boxes:
-            label = LabelData(object_class=object_class, bounding_box=bb)
+            label = LabelData(video_id=video_id, object_class=object_class, bounding_box=bb)
             partial_labels.append(label)
         if len(bounding_boxes) == 0:
             continue
@@ -58,7 +60,7 @@ def process_dataset(labels):
     return labels_dict
 
 
-def write_file(labels):
+def write_file(labels, resolution_dict):
     import pathlib
     print('-------- SAVING LABELS IN YOLO FORMAT --------')
     labels_dict = process_dataset(labels)
@@ -67,10 +69,12 @@ def write_file(labels):
             directory = key.rpartition('/')[0]
             pathlib.Path(directory).mkdir(parents=True, exist_ok=True)
             for label in labels_dict[key]:
-                x_center = str(label.bounding_box[1] + (label.bounding_box[3] // 2))
-                y_center = str(label.bounding_box[0] + (label.bounding_box[2] // 2))
-                width = str(label.bounding_box[3])
-                height = str(label.bounding_box[2])
+                frame_width = resolution_dict[label.video_id].width
+                frame_height = resolution_dict[label.video_id].height
+                x_center = str((label.bounding_box[1] + (label.bounding_box[3] // 2))/frame_width)
+                y_center = str((label.bounding_box[0] + (label.bounding_box[2] // 2))/frame_height)
+                width = str(label.bounding_box[3]/frame_width)
+                height = str((label.bounding_box[2])/frame_height)
                 train_file.write(f"{str(label.object_class)} {x_center} {y_center} {width} {height}")
                 train_file.write('\n')
 
