@@ -1,4 +1,5 @@
 import ast
+import json
 from collections import namedtuple
 
 import pandas as pd
@@ -14,15 +15,28 @@ def get_frame_size(video_info_file):
     ResolutionData = namedtuple('ResolutionData', 'width height')
     # label = LabelData(object_class=object_class, bounding_box=bb)
 
-    resolution_dict = {row["video"]: ResolutionData(int(row['resolution'].split("x")[0]), int(row['resolution'].split("x")[1])) for index, row in video_info.iterrows()}
+    resolution_dict = {
+        row["video"]: ResolutionData(int(row['resolution'].split("x")[0]), int(row['resolution'].split("x")[1])) for
+        index, row in video_info.iterrows()}
     return resolution_dict
 
 
-def process_dataset(labels):
+def get_dataset_dict():
+    import yaml
     all_nouns = pd.read_csv('downloaded-labels/EPIC_noun_classes.csv')
     nouns_list = [row['class_key'] for index, row in all_nouns.iterrows()]
-    ClassData = namedtuple('ClassData', 'new_id name')
-    class_dict = {}
+    dict_file = {'path': "/home/sxa180157/ptg/epic_kitchens_100/object_detection_labels/",
+                 'train': "EPIC-KITCHENS",
+                 'val': "EPIC-KITCHENS",
+                 'test': "",
+                 "nc": len(nouns_list),
+                 'names': json.dumps(nouns_list)}
+
+    with open(r'./epic_kitchens.yaml', 'w') as file:
+        documents = yaml.dump(dict_file, file, sort_keys=False)
+
+
+def process_dataset(labels):
     # Label dict - key - location, value - bounding boxes and class value
     labels_dict = {}
     LabelData = namedtuple('LabelData', 'video_id object_class bounding_box')
@@ -33,16 +47,6 @@ def process_dataset(labels):
         bounding_boxes = ast.literal_eval(label['bounding_boxes'])
         object_class = label['noun_class']  # Use id, a same class may have different names
         video_id = label['video_id']
-        # Save classes in dictionary
-        if object_class not in class_dict:
-            class_data = ClassData(new_id=len(class_dict), name=nouns_list[object_class])  # Save the first noun name
-            class_dict[object_class] = class_data
-            object_class = class_data.new_id  # Save new_id to print into file
-        else:
-            object_class = class_dict[object_class].new_id
-
-        # Save labels in dictionary
-
         partial_labels = []
         for bb in bounding_boxes:
             label = LabelData(video_id=video_id, object_class=object_class, bounding_box=bb)
@@ -54,33 +58,36 @@ def process_dataset(labels):
             labels_dict[location] = partial_labels
         else:
             # Modify
-            old_boundingboxes = labels_dict[location]
-            new_boundingboxes = old_boundingboxes + partial_labels
-            labels_dict[location] = new_boundingboxes
+            old_bounding_boxes = labels_dict[location]
+            new_bounding_boxes = old_bounding_boxes + partial_labels
+            labels_dict[location] = new_bounding_boxes
     return labels_dict
 
 
-def write_file(labels, resolution_dict):
+def write_file(labels):
     import pathlib
     print('-------- SAVING LABELS IN YOLO FORMAT --------')
+    resolution_dict = get_frame_size("./annotations/EPIC_video_info.csv")
     labels_dict = process_dataset(labels)
     for key in labels_dict:
-        with open(key, 'w') as train_file:
+        with open(key, 'w+') as train_file:
             directory = key.rpartition('/')[0]
             pathlib.Path(directory).mkdir(parents=True, exist_ok=True)
             for label in labels_dict[key]:
                 frame_width = resolution_dict[label.video_id].width
                 frame_height = resolution_dict[label.video_id].height
-                x_center = str((label.bounding_box[1] + (label.bounding_box[3] // 2))/frame_width)
-                y_center = str((label.bounding_box[0] + (label.bounding_box[2] // 2))/frame_height)
-                width = str(label.bounding_box[3]/frame_width)
-                height = str((label.bounding_box[2])/frame_height)
+                x_center = str((label.bounding_box[1] + (label.bounding_box[3] // 2)) / frame_width)
+                y_center = str((label.bounding_box[0] + (label.bounding_box[2] // 2)) / frame_height)
+                width = str(label.bounding_box[3] / frame_width)
+                height = str((label.bounding_box[2]) / frame_height)
                 train_file.write(f"{str(label.object_class)} {x_center} {y_center} {width} {height}")
                 train_file.write('\n')
 
     # Each row is class x_center y_center width height format.
 
 
-# labels = pd.read_csv('annotations/EPIC_train_object_labels.csv')
-# write_file(labels)
-print(get_frame_size("./annotations/EPIC_video_info.csv"))
+if __name__ == "__main__":
+    # labels = pd.read_csv('annotations/EPIC_train_object_labels.csv')
+    # labels = labels.head(10)
+    # write_file(labels)
+    get_dataset_dict()
