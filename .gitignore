@@ -257,3 +257,283 @@ fabric.properties
 /Users/shivvarya/Desktop/Study/Research_PTG/Code/epic_kitchen/epic_kitchens_55_object_detection/yolov5/get_data/processed-labels/train_full.txt
 /Users/shivvarya/Desktop/Study/Research_PTG/Code/epic_kitchen/epic_kitchens_55_object_detection/yolov5/get_data/downloaded-labels/EPIC_train_object_labels.csv
 /Users/shivvarya/Desktop/Study/Research_PTG/Code/epic_kitchen/epic_kitchens_55_object_detection/yolov5/get_data/annotations/EPIC_train_object_labels.csv
+
+### macOS
+
+# General
+*.DS_Store
+*.AppleDouble
+*.LSOverride
+
+# Icon must end with two \r
+# Enter two ^M in the code
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+{{ end -}}
+
+### Vim
+
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+{{ if eq .chezmoi.os "darwin" -}}
+# spellfile binaries
+*.add.spl
+{{ end -}}
+
+### Python
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+.python-version
+
+# Created by .ignore support plugin (hsz.mobi)
+### Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# IPython Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# dotenv
+#.env
+
+# virtualenv
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+
+# Rope project settings
+.ropeproject
+### VirtualEnv template
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+#[Bb]in
+#[Ii]nclude
+#[Ll]ib
+#[Ll]ib64
+#[Ll]ocal
+#[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+
+### JetBrains template
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# AWS User-specific
+.idea/**/aws.xml
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+cmake-build-*/
+
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# SonarLint plugin
+.idea/sonarlint/
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client
+.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
+# idea folder, uncomment if you don't need it
+.idea
+.git
+*.csv
+
+Models/Model-4-Dependency-graph/Joint Model/.idea/csv-plugin.xml
+Models/Model-4-Dependency-graph/Joint Model/charades/frame_lists/train.csv
+Models/Model-4-Dependency-graph/Joint Model/charades/frame_lists/val.csv
+Models/Model-4-Dependency-graph/Joint Model/pre_trained/SLOWFAST_16x8_R50.pkl
+Models/Model-4-Dependency-graph/Joint Model/.idea/sonarlint/issuestore/0/b/0b97e0d151b799df50581dea105c6ec9b6a46bad
+Models/Model-4-Dependency-graph/Joint Model/.idea/sonarlint/issuestore/9/9/99c9068c4a8b6aa486f5b2e108df9b18ac889840
+Models/Model-4-Dependency-graph/Joint Model/.idea/sonarlint/issuestore/a/8/a89694cd6d0e8913a62257aae5ab5c8b4f2078b5
+Models/Model-4-Dependency-graph/Joint Model/.idea/sonarlint/issuestore/f/8/f8498924719c868ad483971b6a9f5d4c695f80e6
+get_data/annotations/EPIC_train_object_labels.csv
+get_data/annotations/EPIC_video_info.csv
+get_data/downloaded-labels/EPIC_many_shot_actions.csv
+get_data/downloaded-labels/EPIC_many_shot_nouns.csv
+get_data/downloaded-labels/EPIC_noun_classes.csv
+get_data/downloaded-labels/EPIC_train_action_labels.csv
+get_data/downloaded-labels/EPIC_train_object_labels.csv
+get_data/downloaded-labels/EPIC_verb_classes.csv
+get_data/processed-labels/actions_per_noun-full.csv
+get_data/processed-labels/actions_per_noun.csv
+*.txt
+Models/Model-4-Dependency-graph/from_scratch/Dependency_Graph_parallel_from_scratch_faster/.idea/sonarlint/issuestore/0/d/0d06853e88893ee7bf693a7dfeaf69aa76d70460
+Models/Model-4-Dependency-graph/from_scratch/Dependency_Graph_parallel_from_scratch_faster/.idea/sonarlint/issuestore/5/9/5910d70ded0ac3c70ba3f93a696b5d545d2ab5bb
+Models/Model-4-Dependency-graph/from_scratch/Dependency_Graph_parallel_from_scratch_faster/.idea/sonarlint/issuestore/9/6/962a27f411122ce380622287af96bb6c90064f97
+Models/Model-4-Dependency-graph/from_scratch/Dependency_Graph_parallel_from_scratch_faster/.idea/sonarlint/issuestore/a/c/ac9b6db9f05ec58a9c1a178dbccb6b8a57aff443
+Models/Model-4-Dependency-graph/from_scratch/Dependency_Graph_parallel_from_scratch_faster/.idea/sonarlint/issuestore/d/e/ded2957ccae36824cea380ffc95b7771609859e0
