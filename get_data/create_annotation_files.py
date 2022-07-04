@@ -21,9 +21,17 @@ def get_frame_size(video_info_file):
     return resolution_dict
 
 
+def get_string_from_list(list):
+    this_str = "[ "
+    for each_word in list:
+        this_str += f'\"{str(each_word)}\", '
+    this_str += "]"
+    return this_str
+
+
 def get_dataset_dict():
     import yaml
-    all_nouns = pd.read_csv('downloaded-labels/EPIC_noun_classes.csv')
+    all_nouns = pd.read_csv('annotations/EPIC_noun_classes.csv')
     nouns_list = [row['class_key'] for index, row in all_nouns.iterrows()]
     dict_file = {'path': "/home/sxa180157/ptg/epic_kitchens_100/object_detection_labels/",
                  'train': "EPIC-KITCHENS",

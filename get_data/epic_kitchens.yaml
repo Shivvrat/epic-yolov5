@@ -3,7 +3,7 @@ train: EPIC-KITCHENS
 val: EPIC-KITCHENS
 test: ''
 nc: 352
-names: '"Nothing", "pan", "pan:dust", "tap", "plate", "knife", "bowl", "spoon", "cupboard",
+names: ["Nothing", "pan", "pan:dust", "tap", "plate", "knife", "bowl", "spoon", "cupboard",
   "drawer", "fridge", "lid", "hand", "onion", "onion:spring", "pot", "glass", "water",
   "fork", "board:chopping", "bag", "sponge", "spatula", "cup", "oil", "bin", "meat",
   "potato", "bottle", "container", "tomato", "salt", "cloth", "sink", "door:kitchen",
@@ -45,4 +45,4 @@ names: '"Nothing", "pan", "pan:dust", "tap", "plate", "knife", "bowl", "spoon", 
   "rest", "tablet", "poster", "trousers", "form", "rubber", "rug", "sheets", "pepper:cayenne",
   "waffle", "pineapple", "turkey", "alcohol", "rosemary", "lead", "book", "rim", "gravy",
   "straw", "hat", "cd", "slipper", "casserole", "ladder", "jambalaya", "wall", "tube",
-  "lamp", "tarragon", "heart", "funnel", "whisk", "driver:screw", "trouser"'
+  "lamp", "tarragon", "heart", "funnel", "whisk", "driver:screw", "trouser"]
