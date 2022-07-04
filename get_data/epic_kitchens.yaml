@@ -1,7 +1,7 @@
 path: /home/sxa180157/ptg/epic_kitchens_100/object_detection_labels/
 train: EPIC-KITCHENS
 val: EPIC-KITCHENS
-test: ''
+test: 
 nc: 352
 names: ["Nothing", "pan", "pan:dust", "tap", "plate", "knife", "bowl", "spoon", "cupboard",
   "drawer", "fridge", "lid", "hand", "onion", "onion:spring", "pot", "glass", "water",
