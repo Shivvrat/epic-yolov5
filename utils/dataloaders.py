@@ -387,7 +387,6 @@ class LoadStreams:
     def __len__(self):
         return len(self.sources)  # 1E12 frames = 32 streams at 30 FPS for 30 years
 
-
 def img2label_paths(img_paths):
     # Define label paths as a function of image paths
     sa, sb = f'{os.sep}object_detection_frames{os.sep}', f'{os.sep}object_detection_labels{os.sep}'  # /images/, /labels/ substrings
